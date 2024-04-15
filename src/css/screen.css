@@ -1,0 +1,505 @@
+@media (max-width: 567px) {
+  .navbar-brand h2 {
+    font-size: 16px !important;
+    color: #ca4332;
+  }
+  .banner {
+    padding: 40px 0 0 0;
+  }
+  .banner-content h1 {
+    font-size: 20px;
+  }
+  .banner-content a,
+  .see-prices a,
+  .real-commit a {
+    margin: 10px 0;
+  }
+  .banner img {
+    width: 200px;
+  }
+  .logos-wrap {
+    margin-top: 20px;
+  }
+  .common-heading h2 {
+    font-size: 22px;
+    line-height: 30px;
+  }
+  .absolute-content {
+    position: relative;
+    top: 0;
+    transform: none;
+  }
+  .single-bli {
+    margin-bottom: 50px;
+  }
+  .single-bli,
+  .single-bli p,
+  .single-bli .text-end {
+    text-align: center !important;
+  }
+  .single-bli .content-padding {
+    padding: 0px;
+  }
+  .column-reverse {
+    flex-direction: column-reverse;
+  }
+  .single-bli h4 {
+    margin-top: 20px;
+  }
+  .single-review {
+    margin-top: 20px;
+    text-align: center;
+  }
+  .single-review .verified {
+    justify-content: center;
+  }
+  .see-pp {
+    padding: 30px !important;
+    background-image: none !important;
+  }
+  .real-commit {
+    padding: 30px;
+  }
+  footer h5 {
+    margin-top: 20px;
+  }
+  .footer-block {
+    padding-left: 10px;
+  }
+  footer .bulleted-list {
+    padding-left: 20px;
+  }
+  .small-banner h2,
+  .goal-block h2,
+  .see-prices h6,
+  .contact-form-left h4,
+  .contact-video h2 {
+    font-size: 25px;
+    line-height: 32px;
+  }
+  .born-mission h2,
+  .we-family h2,
+  .lira-difference h2,
+  .our-values h2,
+  .learn-about-lira h2,
+  .partners h2,
+  .top-tier h2 {
+    font-size: 25px;
+    line-height: 32px;
+  }
+  .goal-block {
+    padding: 30px;
+    background-image: none;
+  }
+  .we-family img {
+    margin-top: 20px;
+  }
+  .single-learn {
+    margin-bottom: 20px;
+  }
+  .small-banner {
+    padding: 50px 0;
+  }
+  .contact-video h2 {
+    margin-bottom: 10px;
+  }
+  .insurance-accordions .accordion-header {
+    font-size: 17px !important;
+    padding-right: 20px;
+  }
+  .content-wrapper h2,
+  .archive-section h1 {
+    font-size: 25px;
+  }
+  .blog-content {
+    position: relative;
+    top: 0;
+    transform: none;
+    padding: 30px 50px;
+  }
+  .blog-content h2 {
+    font-size: 18px;
+    line-height: 25px;
+    margin-bottom: 20px;
+  }
+  .blog-details {
+    padding: 30px;
+  }
+  .big-letter-para {
+    margin-bottom: 20px;
+  }
+  .qoutation {
+    flex-direction: column;
+  }
+  .qoutation h2 {
+    font-size: 18px;
+    line-height: 28px;
+  }
+  .blog-details h3 {
+    font-size: 20px;
+    line-height: 28px;
+  }
+  .newsletter h2 {
+    font-size: 25px;
+    margin-bottom: 20px;
+  }
+  .newsletter form .btn {
+    padding: 8px;
+    font-size: 15px;
+  }
+  .newsletter form {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .sal-button {
+    position: relative;
+    top: 0;
+    transform: none;
+    left: 0;
+    bottom: 0;
+    margin-top: 20px;
+  }
+  .single-about-life {
+    min-height: auto;
+  }
+  .navbar-nav {
+    gap: 0px;
+  }
+}
+
+@media only screen and (max-width: 767px) and (min-width: 568px) {
+  .navbar-brand h2 {
+    font-size: 16px !important;
+    color: #ca4332;
+  }
+  .banner {
+    padding: 40px 0 0 0;
+  }
+  .banner-content h1 {
+    font-size: 20px;
+  }
+  .banner-content a,
+  .see-prices a,
+  .real-commit a {
+    margin: 10px 0;
+  }
+  .banner img {
+    width: 200px;
+  }
+  .logos-wrap {
+    margin-top: 20px;
+  }
+  .common-heading h2 {
+    font-size: 22px;
+    line-height: 30px;
+  }
+  .absolute-content {
+    position: relative;
+    top: 0;
+    transform: none;
+  }
+  .single-bli {
+    margin-bottom: 50px;
+  }
+  .single-bli,
+  .single-bli p,
+  .single-bli .text-end {
+    text-align: center !important;
+  }
+  .single-bli .content-padding {
+    padding: 0px;
+  }
+  .column-reverse {
+    flex-direction: column-reverse;
+  }
+  .single-bli h4 {
+    margin-top: 20px;
+  }
+  .single-review {
+    margin-top: 20px;
+    text-align: center;
+  }
+  .single-review .verified {
+    justify-content: center;
+  }
+  .see-pp {
+    padding: 30px !important;
+    background-image: none !important;
+  }
+  .real-commit {
+    padding: 30px;
+  }
+  footer h5 {
+    margin-top: 20px;
+  }
+  .footer-block {
+    padding-left: 10px;
+  }
+  footer .bulleted-list {
+    padding-left: 20px;
+  }
+  .small-banner h2,
+  .goal-block h2,
+  .see-prices h6,
+  .contact-form-left h4,
+  .contact-video h2 {
+    font-size: 25px;
+    line-height: 32px;
+  }
+  .born-mission h2,
+  .we-family h2,
+  .lira-difference h2,
+  .our-values h2,
+  .learn-about-lira h2,
+  .partners h2,
+  .top-tier h2 {
+    font-size: 25px;
+    line-height: 32px;
+  }
+  .goal-block {
+    padding: 30px;
+    background-image: none;
+  }
+  .we-family img {
+    margin-top: 20px;
+  }
+  .single-learn {
+    margin-bottom: 20px;
+  }
+  .small-banner {
+    padding: 50px 0;
+  }
+  .contact-video h2 {
+    margin-bottom: 10px;
+  }
+  .insurance-accordions .accordion-header {
+    font-size: 17px !important;
+    padding-right: 20px;
+  }
+  .content-wrapper h2,
+  .archive-section h1 {
+    font-size: 25px;
+  }
+  .blog-content {
+    position: relative;
+    top: 0;
+    transform: none;
+    padding: 30px 50px;
+  }
+  .blog-content h2 {
+    font-size: 18px;
+    line-height: 25px;
+    margin-bottom: 20px;
+  }
+  .blog-details {
+    padding: 30px;
+  }
+  .big-letter-para {
+    margin-bottom: 20px;
+  }
+  .qoutation {
+    flex-direction: column;
+  }
+  .qoutation h2 {
+    font-size: 18px;
+    line-height: 28px;
+  }
+  .blog-details h3 {
+    font-size: 20px;
+    line-height: 28px;
+  }
+  .newsletter h2 {
+    font-size: 25px;
+    margin-bottom: 20px;
+  }
+  .newsletter form .btn {
+    padding: 8px;
+    font-size: 15px;
+  }
+  .newsletter form {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .navbar-nav {
+    gap: 0px;
+  }
+}
+
+@media only screen and (max-width: 768px) and (min-width: 768px) {
+  .navbar-brand h2 {
+    font-size: 16px !important;
+    color: #ca4332;
+  }
+  .banner {
+    padding: 30px 0 0 0;
+  }
+  .banner-content h1 {
+    font-size: 20px;
+  }
+  .banner-content a,
+  .see-prices a,
+  .real-commit a {
+    margin: 10px 0;
+  }
+  .banner img {
+    width: 400px;
+  }
+  .logos-wrap {
+    margin-top: 20px;
+  }
+  .common-heading h2 {
+    font-size: 22px;
+    line-height: 30px;
+  }
+  .absolute-content {
+    position: relative;
+    top: 0;
+    transform: none;
+  }
+  .single-bli {
+    margin-bottom: 50px;
+  }
+  .single-bli,
+  .single-bli p,
+  .single-bli .text-end {
+    text-align: center !important;
+  }
+  .single-bli .content-padding {
+    padding: 0px;
+  }
+  .single-bli h4 {
+    margin-top: 20px;
+  }
+  .see-pp {
+    padding: 30px !important;
+    background-image: none !important;
+  }
+  .real-commit {
+    padding: 30px;
+  }
+  footer h5 {
+    margin-top: 20px;
+  }
+  .footer-block {
+    padding-left: 10px;
+  }
+  footer .bulleted-list {
+    padding-left: 20px;
+  }
+  .small-banner h2,
+  .goal-block h2,
+  .see-prices h6,
+  .contact-form-left h4,
+  .contact-video h2 {
+    font-size: 25px;
+    line-height: 32px;
+  }
+  .born-mission h2,
+  .we-family h2,
+  .lira-difference h2,
+  .our-values h2,
+  .learn-about-lira h2,
+  .partners h2,
+  .top-tier h2 {
+    font-size: 25px;
+    line-height: 32px;
+  }
+  .goal-block {
+    padding: 30px;
+    background-image: none;
+  }
+  .we-family img {
+    margin-top: 20px;
+  }
+  .single-learn {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .small-banner {
+    padding: 50px 0;
+  }
+  .contact-video h2 {
+    margin-bottom: 10px;
+  }
+  .insurance-accordions .accordion-header {
+    font-size: 17px !important;
+    padding-right: 20px;
+  }
+  .content-wrapper h2,
+  .archive-section h1 {
+    font-size: 25px;
+  }
+  .blog-content {
+    position: relative;
+    top: 0;
+    transform: none;
+    padding: 30px 50px;
+  }
+  .blog-content h2 {
+    font-size: 18px;
+    line-height: 25px;
+    margin-bottom: 20px;
+  }
+  .blog-details {
+    padding: 30px;
+  }
+  .big-letter-para {
+    margin-bottom: 20px;
+  }
+  .qoutation {
+    flex-direction: column;
+  }
+  .qoutation h2 {
+    font-size: 18px;
+    line-height: 28px;
+  }
+  .blog-details h3 {
+    font-size: 20px;
+    line-height: 28px;
+  }
+  .newsletter h2 {
+    font-size: 25px;
+    margin-bottom: 20px;
+  }
+  .newsletter form .btn {
+    padding: 8px;
+    font-size: 15px;
+  }
+  .newsletter form {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media only screen and (max-width: 990px) and (min-width: 769px) {
+  .goal-block h2 {
+    font-size: 22px;
+    line-height: 32px;
+    color: #3a484d;
+    padding-bottom: 10px;
+    font-weight: 700;
+  }
+}
+
+@media only screen and (max-width: 1024px) and (min-width: 991px) {
+  .navbar-brand h2 {
+    font-size: 20px !important;
+  }
+  .sal-button {
+    position: relative;
+    top: 0;
+    transform: none;
+    left: 0;
+    margin-top: 30px;
+    min-width: 100%;
+  }
+  .sal-button a {
+    padding: 10px 20px;
+  }
+  .single-about-life {
+    margin-bottom: 30px;
+  }
+}
+
+@media only screen and (max-width: 1600px) and (min-width: 1025px) {
+}
