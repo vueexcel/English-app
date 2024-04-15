@@ -119,7 +119,7 @@ const showNotify = (message, type = "negative") => {
 // login using google account
 const loginWithGoogle = async () => {
   try {
-    const response = await axios.post(`${SERVER_URL}/googleLogin`);
+    const response = await axios.get(`${SERVER_URL}/api/googleLogin`);
     console.log(response.data);
   } catch (error) {
     console.error("Error:", error);
