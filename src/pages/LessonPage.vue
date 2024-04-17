@@ -49,24 +49,29 @@
         <div class="control-bar-block">
           <div class="progress-bar-bottom">
             <span></span>
-            <em id="gradient-bar" class="timelapse"></em>
+            <em
+              id="gradient-bar"
+              :style="{ width: `${progress}%`, transition: '1s' }"
+            ></em>
           </div>
           <div class="audio-control">
             <a href="javscript:void(0);"
               ><img :src="AngleLeftIcon" alt="Angle Left"
             /></a>
-            <a href="javscript:void(0);"
-              ><img :src="PauseIcon" alt="Pause"
-            /></a>
+            <a href="javscript:void(0);" @click="pauseResume">
+              <img :src="PauseIcon" alt="Pause" />
+            </a>
             <a href="javscript:void(0);">
               <img :src="AngleRightIcon" alt="Angle Right"
             /></a>
           </div>
           <div class="lesson-footer">
-            <a href="#change-level"
+            <a href="#change-level" @click.prevent="level = true"
               ><img :src="VolumeControlIcon" alt="Volume Control"
             /></a>
-            <a href="#report-error"><img :src="ErrorIcon" alt="Error" /></a>
+            <a href="#report-error" @click.prevent="feedback = true"
+              ><img :src="ErrorIcon" alt="Error"
+            /></a>
             <RouterLink to="/course/1/rules"
               ><img :src="QuestionIcon" alt="Question"
             /></RouterLink>
@@ -127,7 +132,12 @@
     </div>
 
     <!-- Change level -->
-    <div id="change-level" class="overlay modal-main-wrap">
+    <div
+      id="change-level"
+      class="overlay modal-main-wrap"
+      v-if="level"
+      style="opacity: 1; visibility: visible"
+    >
       <div class="popup">
         <div class="modal-content">
           <h3>You are at level 3 out of 4</h3>
@@ -138,14 +148,19 @@
             <p>Increase to 4</p>
           </div>
         </div>
-        <a class="popup-close-btn" href="#">
+        <a class="popup-close-btn" href="#" @click.prevent="level = false">
           <p>&times;</p>
         </a>
       </div>
     </div>
 
     <!-- Report Error -->
-    <div id="report-error" class="overlay modal-main-wrap">
+    <div
+      id="report-error"
+      class="overlay modal-main-wrap"
+      v-if="feedback"
+      style="opacity: 1; visibility: visible"
+    >
       <div class="popup">
         <div class="modal-content">
           <form @submit.prevent="submitErrorReport" class="report-form">
@@ -174,7 +189,7 @@
             <input type="submit" value="Submit" class="btn" />
           </form>
         </div>
-        <a class="popup-close-btn" href="#">
+        <a class="popup-close-btn" href="#" @click.prevent="feedback = false">
           <p>&times;</p>
         </a>
       </div>
@@ -217,6 +232,12 @@ import ErrorIcon from "components/icons/error.svg";
 import QuestionIcon from "components/icons/question.svg";
 
 const confirm = ref(false);
+const level = ref(false);
+const feedback = ref(false);
+
+const progress = ref(0);
+const isPaused = ref(false);
+let interval;
 
 defineOptions({
   name: "LessonPage",
@@ -229,6 +250,22 @@ const message = ref("");
 const countdown = ref(3);
 
 const showEnglishPhras = ref(false);
+
+const pauseResume = () => {
+  if (isPaused.value) {
+    setInterval(() => {
+      progress.value += 1;
+
+      if (progress.value == 100) {
+        clearInterval(interval);
+      }
+    }, 100);
+  } else {
+    clearInterval(interval);
+  }
+
+  isPaused.value = !isPaused.value;
+};
 
 const submitErrorReport = () => {
   // Your logic to submit error report
@@ -252,6 +289,13 @@ onMounted(() => {
       countdown.value--;
     } else {
       clearInterval(countdownInterval);
+      interval = setInterval(() => {
+        progress.value += 1;
+
+        if (progress.value == 100) {
+          clearInterval(interval);
+        }
+      }, 100);
     }
   }, 1000);
 });
