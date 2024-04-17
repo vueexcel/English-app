@@ -64,9 +64,9 @@
 
 <script setup>
 import axios from "axios";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useQuasar } from "quasar";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 
 import GoogleIcon from "components/icons/google.svg";
 import FacebookIcon from "components/icons/facebook.svg";
@@ -78,6 +78,7 @@ const userStore = useUserStore();
 const $q = useQuasar();
 
 const router = useRouter();
+const route = useRoute();
 
 defineOptions({
   name: "LoginPage",
@@ -113,28 +114,34 @@ const handleLogin = () => {
   } else if (!password.value) {
     showNotify("Please enter your password");
   } else {
-    axios
-      .post(`${SERVER_URL}/api/login`, {
-        email: email.value,
-        password: password.value,
-      })
-      .then((response) => {
-        console.log(response);
-        if (response.data.status === "success") {
-          showNotify("Login Successful", "positive");
-          const accessToken = response.data.access_token;
-          userStore.setAccessToken(accessToken);
-          console.log(accessToken);
-          router.push("/home");
-        } else {
-          console.log("invalid credentials");
-          showNotify("Invalid Credentials");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        showNotify("Login Failed");
-      });
+    // axios
+    //   .post(`${SERVER_URL}/api/login`, {
+    //     email: email.value,
+    //     password: password.value,
+    //   })
+    //   .then((response) => {
+    //     console.log(response);
+    //     if (response.data.status === "success") {
+    //       showNotify("Login Successful", "positive");
+    //       const accessToken = response.data.access_token;
+    //       userStore.setAccessToken(accessToken);
+    //       console.log(accessToken);
+    //       router.push("/home");
+    //     } else {
+    //       console.log("invalid credentials");
+    //       showNotify("Invalid Credentials");
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //     showNotify("Login Failed");
+    //   });
+    showNotify("login successful", "positive");
+    router.push("/home");
   }
 };
+
+onMounted(() => {
+  console.log(route.query.code);
+});
 </script>

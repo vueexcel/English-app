@@ -8,7 +8,7 @@
           </div>
           <div>
             <h5>{{ store.user }}</h5>
-            <p>Connected Via Google</p>
+            <p>{{ store.userName }}</p>
           </div>
         </div>
         <a href="javascript:void(0)">
@@ -36,7 +36,7 @@
           <img :src="ShareIcon" alt="Share" />
           <p>Share with friends</p>
         </a>
-        <a><button class="logout" @click="HandleLogout()">LOGOUT</button></a>
+        <button class="logout" @click="HandleLogout()">LOGOUT</button>
       </div>
     </section>
   </main-layout>
@@ -69,7 +69,6 @@ const showNotify = (message, type = "negative") => {
 const router = useRouter();
 
 const store = useUserStore();
-const accessToken = store.setAccessToken();
 
 const HandleLogout = () => {
   store.setUser(null);

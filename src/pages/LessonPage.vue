@@ -7,7 +7,7 @@
       style="display: flex; flex-direction: column"
     >
       <div class="lesson-page-header">
-        <a href="#close-lesson"><img :src="CrossIcon" alt="Cross" /></a>
+        <a @click="confirm = 'true'"><img :src="CrossIcon" alt="Cross" /></a>
         <div class="progress-bar-top">
           <span></span>
           <em style="width: 165px"></em>
@@ -76,14 +76,19 @@
     </section>
 
     <!-- Lesson Close -->
-    <div id="close-lesson" class="overlay modal-main-wrap">
+    <div
+      v-if="confirm"
+      id="close-lesson"
+      class="overlay modal-main-wrap"
+      style="visibility: visible; opacity: 1"
+    >
       <div class="popup">
         <div class="modal-content">
           <h3>You will lose progress if you close now</h3>
-          <a href="#">Continue lesson</a>
+          <a href="#" @click.prevent="confirm = false">Continue lesson</a>
           <RouterLink to="/category/123">GO OUT</RouterLink>
         </div>
-        <a class="popup-close-btn" href="#">
+        <a class="popup-close-btn" @click.prevent="confirm = false" href="#">
           <p>&times;</p>
         </a>
       </div>
@@ -93,7 +98,8 @@
     <div
       id="increase-level"
       class="overlay modal-main-wrap"
-      :class="{ 'opacity-1': showIncreaseLevel }"
+      style="visibility: visible; opacity: 1"
+      v-if="showIncreaseLevel"
     >
       <div class="popup">
         <div class="modal-content">
@@ -103,9 +109,18 @@
           <a href="javascript:void(0);" @click="showIncreaseLevel = false"
             >Increase a speed</a
           >
-          <a href="#" class="repeat-speed">Repeat at this speed</a>
+          <a
+            href="#"
+            class="repeat-speed"
+            @click.prevent="showIncreaseLevel = false"
+            >Repeat at this speed</a
+          >
         </div>
-        <a class="popup-close-btn" href="#" @click="showIncreaseLevel = false">
+        <a
+          class="popup-close-btn"
+          href="#"
+          @click.prevent="showIncreaseLevel = false"
+        >
           <p>&times;</p>
         </a>
       </div>
@@ -200,6 +215,8 @@ import AngleRightIcon from "components/icons/angle-right.svg";
 import VolumeControlIcon from "components/icons/volume-control.svg";
 import ErrorIcon from "components/icons/error.svg";
 import QuestionIcon from "components/icons/question.svg";
+
+const confirm = ref(false);
 
 defineOptions({
   name: "LessonPage",

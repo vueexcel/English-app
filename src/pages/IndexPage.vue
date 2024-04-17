@@ -20,6 +20,8 @@
     </div>
 
     <CourseSlider :title="'Phrases for Everyday'" background-color="blue" />
+
+    
   </main-layout>
 </template>
 

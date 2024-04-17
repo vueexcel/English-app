@@ -72,7 +72,7 @@
           <p>Or</p>
         </div>
         <div class="social-links">
-          <button type="button" class="icon" @click="loginWithGoogle">
+          <button type="button" class="icon" @click="signInWithGoogle">
             <img :src="GoogleIcon" alt="Google" />
           </button>
           <button class="icon"><img :src="AppleIcon" alt="Apple" /></button>
@@ -94,6 +94,10 @@ import GoogleIcon from "components/icons/google.svg";
 import FacebookIcon from "components/icons/facebook.svg";
 import AppleIcon from "components/icons/apple.svg";
 import { SERVER_URL } from "src/constants";
+import { useUserStore } from "src/stores/useUserStore";
+const userStore = useUserStore();
+
+import { GoogleAuth } from "@codetrix-studio/capacitor-google-auth";
 
 const router = useRouter();
 const $q = useQuasar();
@@ -115,25 +119,42 @@ const showNotify = (message, type = "negative") => {
     timeout: 1000,
   });
 };
+// using firebase to login with google
 
-// login using google account
-const loginWithGoogle = async () => {
-  try {
-    const response = await axios.get(`${SERVER_URL}/api/googleLogin`);
-    console.log(response.data);
-  } catch (error) {
-    console.error("Error:", error);
-  }
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { auth } from "../components/FirebaseFile.js";
+
+const signInWithGoogle = () => {
+  const provider = new GoogleAuthProvider();
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      console.log(result);
+      console.log(result.user.displayName);
+      const accessToken = result.user.accessToken;
+      const userName = result.user.displayName;
+      userStore.setUser(userName);
+      userStore.setAccessToken(accessToken);
+      console.log(accessToken);
+      if (result.user.accessToken) {
+        router.push("/home");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 };
+
 // register using facebook account
 const loginWithFacebook = async () => {
   try {
-    const response = await axios.post("/facebookLogin");
-    console.log(response.data);
+    const response = await axios.get("http://localhost:8000/api/facebookLogin");
+    console.log(response.data.URl);
+    window.open(response.data.URl, "_blank");
   } catch (error) {
     console.error("Error:", error);
   }
 };
+
 const handleRegister = () => {
   if (!name.value) {
     showNotify("Please enter your name");
