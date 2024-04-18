@@ -581,11 +581,13 @@ h6 {
   visibility: hidden;
   opacity: 0;
   z-index: 1000000;
-}
-.overlay:target {
   visibility: visible;
   opacity: 1;
 }
+/* .overlay:target {
+  visibility: visible;
+  opacity: 1;
+} */
 .popup {
   padding: 20px;
   position: absolute;

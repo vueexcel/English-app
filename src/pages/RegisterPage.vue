@@ -167,25 +167,25 @@ const handleRegister = () => {
   } else if (password.value !== rePassword.value) {
     showNotify("Passwords do not match");
   } else {
-    // axios
-    //   .post(`${SERVER_URL}/api/register`, {
-    //     name: name.value,
-    //     email: email.value,
-    //     password: password.value,
-    //   })
-    //   .then((response) => {
-    //     console.log(response);
-    //     if (response.data.status === "success") {
-    //       showNotify("Registration Successful", "positive");
-    //       router.push("/");
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log(error.response.data.errors.email);
-    //     showNotify(error.response.data.errors.email);
-    //   });
-    showNotify("Registration Successfully", "positive");
-    router.push("/home");
+    axios
+      .post(`${SERVER_URL}/api/register`, {
+        name: name.value,
+        email: email.value,
+        password: password.value,
+      })
+      .then((response) => {
+        console.log(response);
+        if (response.data.status === "success") {
+          showNotify("Registration Successful", "positive");
+          router.push("/");
+        }
+      })
+      .catch((error) => {
+        console.log(error.response.data.errors.email);
+        showNotify(error.response.data.errors.email);
+      });
+    // showNotify("Registration Successfully", "positive");
+    // router.push("/home");
   }
 };
 </script>

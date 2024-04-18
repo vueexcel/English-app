@@ -114,34 +114,33 @@ const handleLogin = () => {
   } else if (!password.value) {
     showNotify("Please enter your password");
   } else {
-    // axios
-    //   .post(`${SERVER_URL}/api/login`, {
-    //     email: email.value,
-    //     password: password.value,
-    //   })
-    //   .then((response) => {
-    //     console.log(response);
-    //     if (response.data.status === "success") {
-    //       showNotify("Login Successful", "positive");
-    //       const accessToken = response.data.access_token;
-    //       userStore.setAccessToken(accessToken);
-    //       console.log(accessToken);
-    //       router.push("/home");
-    //     } else {
-    //       console.log("invalid credentials");
-    //       showNotify("Invalid Credentials");
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //     showNotify("Login Failed");
-    //   });
-    showNotify("login successful", "positive");
-    router.push("/home");
+    axios
+      .post(`${SERVER_URL}/api/login`, {
+        email: email.value,
+        password: password.value,
+      })
+      .then((response) => {
+        console.log(response);
+        if (response.data.status === "success") {
+          showNotify("Login Successful", "positive");
+          const accessToken = response.data.access_token;
+          userStore.setAccessToken(accessToken);
+          console.log(accessToken);
+          const userName = response.data.user.name;
+          console.log(userName);
+          userStore.setUserName(userName);
+          router.push("/home");
+        } else {
+          console.log("invalid credentials");
+          showNotify("Invalid Credentials");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        showNotify("Login Failed");
+      });
+    // showNotify("login successful", "positive");
+    // router.push("/home");
   }
 };
-
-onMounted(() => {
-  console.log(route.query.code);
-});
 </script>

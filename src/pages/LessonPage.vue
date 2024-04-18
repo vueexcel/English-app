@@ -1,18 +1,13 @@
 <template>
   <div class="lesson-page">
-    <!-- Login Screen -->
     <section
       class="screen-wrapper"
-      v-if="countdown === 0"
+      v-if="!countDown"
       style="display: flex; flex-direction: column"
     >
-      <div class="lesson-page-header">
-        <a @click="confirm = 'true'"><img :src="CrossIcon" alt="Cross" /></a>
-        <div class="progress-bar-top">
-          <span></span>
-          <em style="width: 165px"></em>
-        </div>
-      </div>
+      <!-- Header -->
+      <LessonHeader :count="dummyPhrases.length" :active="currentPhrase + 1" />
+
       <div
         class="lesson-page-body"
         style="
@@ -24,285 +19,160 @@
       >
         <div class="lesson-text-block">
           <div class="lesson-paras">
-            <h2>Она любит покупать продукты в магазине</h2>
             <transition name="slide-fade">
-              <h2
-                id="english-phrase"
-                href="englishPhrase"
-                v-if="showEnglishPhras"
-              >
-                She likes to buy groceries at the store
+              <h2 id="russian-phrase" v-if="showRussianPhrase">
+                {{ dummyPhrases[currentPhrase].ru }}
+              </h2>
+            </transition>
+
+            <transition name="slide-fade">
+              <h2 id="english-phrase" v-if="showEnglishPhrase">
+                {{ dummyPhrases[currentPhrase].en }}
               </h2>
             </transition>
           </div>
           <div class="mute-slow">
-            <a href="javascript:void(0)"
-              ><img :src="AudioIcon" alt="Audio"
-            /></a>
-            <a href="javascript:void(0)"
-              ><img :src="SoundSlowIcon" alt="Slow Audio"
-            /></a>
-          </div>
-        </div>
-      </div>
-      <div class="lesson-page-body lpb2">
-        <div class="control-bar-block">
-          <div class="progress-bar-bottom">
-            <span></span>
-            <em
-              id="gradient-bar"
-              :style="{ width: `${progress}%`, transition: '1s' }"
-            ></em>
-          </div>
-          <div class="audio-control">
-            <a href="javscript:void(0);"
-              ><img :src="AngleLeftIcon" alt="Angle Left"
-            /></a>
-            <a href="javscript:void(0);" @click="pauseResume">
-              <img :src="PauseIcon" alt="Pause" />
+            <a href="javascript:void(0)">
+              <img :src="AudioIcon" alt="Audio" />
             </a>
-            <a href="javscript:void(0);">
-              <img :src="AngleRightIcon" alt="Angle Right"
-            /></a>
-          </div>
-          <div class="lesson-footer">
-            <a href="#change-level" @click.prevent="level = true"
-              ><img :src="VolumeControlIcon" alt="Volume Control"
-            /></a>
-            <a href="#report-error" @click.prevent="feedback = true"
-              ><img :src="ErrorIcon" alt="Error"
-            /></a>
-            <RouterLink to="/course/1/rules"
-              ><img :src="QuestionIcon" alt="Question"
-            /></RouterLink>
+            <a href="javascript:void(0)">
+              <img :src="SoundSlowIcon" alt="Slow Audio" />
+            </a>
           </div>
         </div>
       </div>
+      <LessonFooter
+        :courseId="1"
+        :state="state"
+        @next="nextPhrase"
+        @prev="prevPhrase"
+        @state-change="onStateChange"
+      />
     </section>
 
-    <!-- Lesson Close -->
-    <div
-      v-if="confirm"
-      id="close-lesson"
-      class="overlay modal-main-wrap"
-      style="visibility: visible; opacity: 1"
-    >
-      <div class="popup">
-        <div class="modal-content">
-          <h3>You will lose progress if you close now</h3>
-          <a href="#" @click.prevent="confirm = false">Continue lesson</a>
-          <RouterLink to="/category/123">GO OUT</RouterLink>
-        </div>
-        <a class="popup-close-btn" @click.prevent="confirm = false" href="#">
-          <p>&times;</p>
-        </a>
-      </div>
-    </div>
+    <!-- Increase speed -->
 
-    <!-- Increase level -->
-    <div
-      id="increase-level"
-      class="overlay modal-main-wrap"
-      style="visibility: visible; opacity: 1"
-      v-if="showIncreaseLevel"
-    >
-      <div class="popup">
-        <div class="modal-content">
-          <h3>
-            You have completed all the phrases. Want to increase your speed?
-          </h3>
-          <a href="javascript:void(0);" @click="showIncreaseLevel = false"
-            >Increase a speed</a
-          >
-          <a
-            href="#"
-            class="repeat-speed"
-            @click.prevent="showIncreaseLevel = false"
-            >Repeat at this speed</a
-          >
-        </div>
-        <a
-          class="popup-close-btn"
-          href="#"
-          @click.prevent="showIncreaseLevel = false"
-        >
-          <p>&times;</p>
-        </a>
-      </div>
-    </div>
-
-    <!-- Change level -->
-    <div
-      id="change-level"
-      class="overlay modal-main-wrap"
-      v-if="level"
-      style="opacity: 1; visibility: visible"
-    >
-      <div class="popup">
-        <div class="modal-content">
-          <h3>You are at level 3 out of 4</h3>
-          <div class="level-list">
-            <p>Decrease to 1</p>
-            <p>Decrease to 2</p>
-            <p><b>Stay for 3</b></p>
-            <p>Increase to 4</p>
-          </div>
-        </div>
-        <a class="popup-close-btn" href="#" @click.prevent="level = false">
-          <p>&times;</p>
-        </a>
-      </div>
-    </div>
-
-    <!-- Report Error -->
-    <div
-      id="report-error"
-      class="overlay modal-main-wrap"
-      v-if="feedback"
-      style="opacity: 1; visibility: visible"
-    >
-      <div class="popup">
-        <div class="modal-content">
-          <form @submit.prevent="submitErrorReport" class="report-form">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Enter Your Name"
-              v-model="name"
-            />
-            <input
-              type="email"
-              class="form-control"
-              placeholder="Enter Your Email"
-              v-model="email"
-            />
-            <textarea
-              name="message"
-              id="message"
-              cols="30"
-              rows="4"
-              height="300"
-              class="form-control"
-              placeholder="Enter your Message"
-              v-model="message"
-            ></textarea>
-            <input type="submit" value="Submit" class="btn" />
-          </form>
-        </div>
-        <a class="popup-close-btn" href="#" @click.prevent="feedback = false">
-          <p>&times;</p>
-        </a>
-      </div>
-    </div>
-
-    <!-- Sent Error Confirmation -->
-    <div id="error-sent-confirm" class="overlay modal-main-wrap">
-      <div class="popup">
-        <h4>
-          Thank you for your attention, the error message has been sent, we will
-          check and fix it.
-        </h4>
-        <a href="#" class="continue-traning">Continue Training</a>
-        <a class="popup-close-btn" href="#">
-          <p>&times;</p>
-        </a>
-      </div>
-    </div>
-
-    <div class="training-starts" id="training-starts">
-      <div class="start-content">
-        <h5>Training will start in</h5>
-        <h1>{{ countdown }}</h1>
-      </div>
-      <div class="training-overlay"></div>
-    </div>
+    <TrainingStart @close="onStart" v-else />
   </div>
+
+  <audio style="display: none" ref="audioRef"></audio>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from "vue";
-import CrossIcon from "components/icons/cross.svg";
-import AudioIcon from "components/icons/audio.svg";
-import SoundSlowIcon from "components/icons/sound-slow.svg";
-import AngleLeftIcon from "components/icons/angle-left.svg";
-import PauseIcon from "components/icons/pause.svg";
-import AngleRightIcon from "components/icons/angle-right.svg";
-import VolumeControlIcon from "components/icons/volume-control.svg";
-import ErrorIcon from "components/icons/error.svg";
-import QuestionIcon from "components/icons/question.svg";
+import { ref } from "vue";
+import LessonHeader from "../components/Lesson/LessonHeader.vue";
+import LessonFooter from "../components/Lesson/LessonFooter.vue";
+import TrainingStart from "../components/Lesson/modals/TrainingStart.vue";
 
-const confirm = ref(false);
-const level = ref(false);
-const feedback = ref(false);
+import AudioIcon from "../components/icons/audio.svg";
+import SoundSlowIcon from "../components/icons/sound-slow.svg";
 
-const progress = ref(0);
-const isPaused = ref(false);
-let interval;
+import RussianPhrase from "../components/sounds/russianPhrase.mp3";
+import EnglishPhrase from "../components/sounds/EnglishPhrase.mp3";
 
-defineOptions({
-  name: "LessonPage",
-});
+const countDown = ref(true);
+const currentPhrase = ref(0);
+const audioRef = ref(null);
 
-const showIncreaseLevel = ref(false);
-const name = ref("");
-const email = ref("");
-const message = ref("");
-const countdown = ref(3);
+const state = ref("reset");
 
-const showEnglishPhras = ref(false);
+const showEnglishPhrase = ref(false);
+const showRussianPhrase = ref(false);
 
-const pauseResume = () => {
-  if (isPaused.value) {
-    setInterval(() => {
-      progress.value += 1;
+const onStateChange = (type) => {
+  if (type === "reset") {
+    audioRef.value.src = dummyPhrases[currentPhrase.value].ruAudio;
+    audioRef.value.play();
+  } else if (type === "end") {
+    showEnglishPhrase.value = true;
+    audioRef.value.src = dummyPhrases[currentPhrase.value].enAudio;
+    audioRef.value.play();
+  } else if (type === "pause") {
+    if (state.value != "start") audioRef.value.pause();
+  } else if (type === "resume") {
+    if (state.value != "start") audioRef.value.play();
+  }
+};
 
-      if (progress.value == 100) {
-        clearInterval(interval);
-      }
-    }, 100);
-  } else {
-    clearInterval(interval);
+const onStart = () => {
+  countDown.value = false;
+  showRussianPhrase.value = true;
+
+  audioRef.value.src = dummyPhrases[currentPhrase.value].ruAudio;
+  audioRef.value.play();
+
+  // add event listener for onended audio
+  const onended = () => {
+    state.value = "start";
+  };
+
+  audioRef.value.addEventListener("ended", onended);
+};
+
+const nextPhrase = () => {
+  if (currentPhrase.value === dummyPhrases.length - 1) {
+    console.log("On ended");
+    return;
   }
 
-  isPaused.value = !isPaused.value;
+  currentPhrase.value++;
+  countDown.value = true;
+  audioRef.value.pause();
+  audioRef.value.currentTime = 0;
+  state.value = "reset";
+  showEnglishPhrase.value = false;
 };
 
-const submitErrorReport = () => {
-  // Your logic to submit error report
+const prevPhrase = () => {
+  if (currentPhrase.value === 0) {
+    return;
+  }
+
+  currentPhrase.value++;
+  countDown.value = true;
+  audioRef.value.pause();
+  audioRef.value.currentTime = 0;
+  state.value = "reset";
+  showEnglishPhrase.value = false;
 };
 
-onMounted(() => {
-  setTimeout(() => {
-    showIncreaseLevel.value = true;
-  }, 15000);
+const dummyPhrases = [
+  {
+    en: "She likes to buy groceries at the store",
+    ru: "Она любит покупать продукты в магазине",
 
-  setTimeout(() => {
-    document.getElementById("training-starts").style.display = "none";
-  }, 3000);
+    enAudio: EnglishPhrase,
+    ruAudio: RussianPhrase,
+  },
+  {
+    en: "She likes to buy groceries at the store",
+    ru: "Она любит покупать продукты в магазине",
 
-  setTimeout(() => {
-    showEnglishPhras.value = true;
-  }, 10000);
+    enAudio: EnglishPhrase,
+    ruAudio: RussianPhrase,
+  },
+  {
+    en: "She likes to buy groceries at the store",
+    ru: "Она любит покупать продукты в магазине",
 
-  const countdownInterval = setInterval(() => {
-    if (countdown.value > 0) {
-      countdown.value--;
-    } else {
-      clearInterval(countdownInterval);
-      interval = setInterval(() => {
-        progress.value += 1;
+    enAudio: EnglishPhrase,
+    ruAudio: RussianPhrase,
+  },
+  {
+    en: "She likes to buy groceries at the store",
+    ru: "Она любит покупать продукты в магазине",
 
-        if (progress.value == 100) {
-          clearInterval(interval);
-        }
-      }, 100);
-    }
-  }, 1000);
-});
+    enAudio: EnglishPhrase,
+    ruAudio: RussianPhrase,
+  },
+  {
+    en: "She likes to buy groceries at the store",
+    ru: "Она любит покупать продукты в магазине",
 
-onUnmounted(() => {
-  // logic
-});
+    enAudio: EnglishPhrase,
+    ruAudio: RussianPhrase,
+  },
+];
 </script>
 
 <style scoped>

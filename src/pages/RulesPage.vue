@@ -21,12 +21,6 @@
         <router-link to="/course/1/lesson"> Train </router-link>
       </div>
     </div>
-    <div class="app-screen-footer">
-      <div>
-        <a href="#"><img src="images/home.svg" alt="Home" /></a>
-        <a href="#"><img src="images/settings.svg" alt="Settings" /></a>
-      </div>
-    </div>
   </MainLayout>
 </template>
 

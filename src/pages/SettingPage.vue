@@ -8,7 +8,7 @@
           </div>
           <div>
             <h5>{{ store.user }}</h5>
-            <p>{{ store.userName }}</p>
+            <h5>{{ store.loginName }}</h5>
           </div>
         </div>
         <a href="javascript:void(0)">
@@ -73,6 +73,8 @@ const store = useUserStore();
 const HandleLogout = () => {
   store.setUser(null);
   store.setAccessToken(null);
+  store.setName(null);
+  store.setUserName(null);
   showNotify("Logout Successful", "positive");
   router.push("/");
 };

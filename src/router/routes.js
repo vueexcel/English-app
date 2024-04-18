@@ -52,7 +52,7 @@ const routes = [
   {
     path: "/course/:id/lesson",
     name: "lesson",
-    component: () => import("pages/LessonPage.vue"),
+    component: () => import("src/pages/LessonPage.vue"),
   },
   {
     path: "/course/:id",

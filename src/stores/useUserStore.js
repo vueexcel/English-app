@@ -13,6 +13,9 @@ export const useUserStore = defineStore("user", () => {
   const userName = ref(
     localStorage.getItem("name") ? localStorage.getItem("name") : null
   );
+  const loginName = ref(
+    localStorage.getItem("name") ? localStorage.getItem("name") : null
+  );
 
   function setUser(newUser) {
     user.value = newUser;
@@ -23,6 +26,10 @@ export const useUserStore = defineStore("user", () => {
   }
   function setName(name) {
     userName.value = name;
+  }
+
+  function setUserName(name) {
+    loginName.value = name;
   }
 
   watch(
@@ -56,6 +63,13 @@ export const useUserStore = defineStore("user", () => {
       localStorage.removeItem("name");
     }
   });
+  watch(loginName, (newName) => {
+    if (newName) {
+      localStorage.setItem("name", newName);
+    } else {
+      localStorage.removeItem("name");
+    }
+  });
 
   return {
     user,
@@ -64,5 +78,7 @@ export const useUserStore = defineStore("user", () => {
     setAccessToken,
     setName,
     userName,
+    setUserName,
+    loginName,
   };
 });
