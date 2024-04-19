@@ -12,7 +12,7 @@
         method="POST"
         @submit.prevent="handleResetPassword"
       >
-        <div class="input-field">
+        <!-- <div class="input-field">
           <label for="newPassword">New Password</label>
           <input
             type="password"
@@ -21,8 +21,15 @@
             placeholder="Enter new password"
             v-model="newPassword"
           />
-        </div>
-        <div class="input-field">
+        </div> -->
+
+        <InputTemp
+          v-model="newPassword"
+          :label="'New Password'"
+          :placeholder="'Enter new Password'"
+        />
+
+        <!-- <div class="input-field">
           <label for="confirmNewPassword">Confirm New Password</label>
           <input
             type="password"
@@ -31,7 +38,14 @@
             placeholder="Confirm new password"
             v-model="confirmNewPassword"
           />
-        </div>
+        </div> -->
+
+        <InputTemp
+          v-model="confirmNewPassword"
+          :label="'Confirm new Password'"
+          :placeholder="'Confirm new Password'"
+        />
+
         <div class="forgot-pass">
           <input type="submit" class="btn" value="Reset" />
         </div>
@@ -45,6 +59,7 @@ import { ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import axios from "axios";
 import { SERVER_URL } from "src/constants";
+import InputTemp from "components/InputTemp.vue";
 
 import { useQuasar } from "quasar";
 import ArrowLeftIcon from "components/icons/arrow-left.svg";

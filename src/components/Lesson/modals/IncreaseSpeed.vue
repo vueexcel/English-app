@@ -19,5 +19,5 @@
 </template>
 
 <script setup>
-defineEmits(["close", "increase", "back"]);
+defineEmits(["close", "increase"]);
 </script>

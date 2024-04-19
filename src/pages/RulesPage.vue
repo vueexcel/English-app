@@ -26,5 +26,28 @@
 
 <script setup>
 import MainLayout from "src/layouts/MainLayout.vue";
+import { onBeforeMount, ref } from "vue";
 import youtube from "../components/icons/youtube.svg";
+
+const rules = ref({
+  description: "",
+  video: "url",
+  rules: [
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  ],
+});
+
+const getCourseRules = () => {
+  //const data = axios.get("http://localhost:8000/api/getCourseRules/123456")
+  // rules.value = data.data;
+};
+
+onBeforeMount(() => {
+  getCourseRules();
+});
 </script>

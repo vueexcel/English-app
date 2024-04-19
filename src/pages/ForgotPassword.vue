@@ -6,6 +6,9 @@
       </a>
       <h3>Forgot Password?</h3>
     </div>
+    <div class="forgot">
+      <img :src="forgot" alt="Forgot Password" />
+    </div>
     <div class="wrapper-vertical-center">
       <div class="forgot-password-note">
         <p>
@@ -46,6 +49,7 @@ import { useRouter } from "vue-router";
 import ArrowLeftIcon from "components/icons/arrow-left.svg";
 import { useQuasar } from "quasar";
 import { SERVER_URL } from "src/constants";
+import forgot from "../components/icons/forgot-image.svg";
 
 const $q = useQuasar();
 
@@ -90,3 +94,12 @@ const handleForgotPassword = () => {
   }
 };
 </script>
+<style scoped>
+.forgot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  margin-bottom: 2.5rem;
+}
+</style>

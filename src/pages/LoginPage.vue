@@ -15,7 +15,7 @@
             v-model="email"
           />
         </div>
-        <div class="input-field">
+        <!-- <div class="input-field">
           <label for="password">Enter your password</label>
           <div class="position-relative w-100 password-wrap">
             <input
@@ -32,7 +32,14 @@
               class="fa fa-fw fa-eye field-icon toggle-password"
             ></span>
           </div>
-        </div>
+        </div> -->
+
+        <InputTemp
+          v-model="password"
+          :label="'Enter your password'"
+          :placeholder="'Password'"
+        />
+
         <div class="forgot-pass">
           <p>
             <router-link to="/forgot">Forgot password?</router-link>
@@ -72,6 +79,8 @@ import GoogleIcon from "components/icons/google.svg";
 import FacebookIcon from "components/icons/facebook.svg";
 import AppleIcon from "components/icons/apple.svg";
 import { SERVER_URL } from "src/constants";
+import InputTemp from "components/InputTemp.vue";
+
 import { useUserStore } from "src/stores/useUserStore";
 const userStore = useUserStore();
 

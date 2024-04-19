@@ -71,7 +71,9 @@ const props = defineProps(["courseId", "state"]);
 const emit = defineEmits(["next", "prev", "stateChange"]);
 
 const progressSpeed = [7000, 5000, 3000, 2500];
-const level = ref(3);
+const level = ref(
+  localStorage.getItem("level") ? parseInt(localStorage.getItem("level")) : 1
+);
 
 const feedbackModal = ref(false);
 const levelModal = ref(false);
@@ -94,6 +96,8 @@ watch(level, () => {
   progress.value = 0;
   isPaused.value = true;
   emit("stateChange", "reset");
+
+  localStorage.setItem("level", level.value);
 });
 
 const startProgress = () => {
@@ -108,6 +112,10 @@ const startProgress = () => {
 };
 
 const pauseResume = () => {
+  if (props.state == "reset") {
+    return;
+  }
+
   if (isPaused.value) {
     startProgress();
     emit("stateChange", "resume");

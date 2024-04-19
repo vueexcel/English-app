@@ -50,9 +50,14 @@
       />
     </section>
 
-    <!-- Increase speed -->
-
     <TrainingStart @close="onStart" v-else />
+
+    <!-- Increase speed -->
+    <IncreaseSpeed
+      @close="showIncreseSpeed = false"
+      @increase="() => {}"
+      v-if="showIncreseSpeed"
+    />
   </div>
 
   <audio style="display: none" ref="audioRef"></audio>
@@ -63,6 +68,7 @@ import { ref } from "vue";
 import LessonHeader from "../components/Lesson/LessonHeader.vue";
 import LessonFooter from "../components/Lesson/LessonFooter.vue";
 import TrainingStart from "../components/Lesson/modals/TrainingStart.vue";
+import IncreaseSpeed from "../components/Lesson/modals/IncreaseSpeed.vue";
 
 import AudioIcon from "../components/icons/audio.svg";
 import SoundSlowIcon from "../components/icons/sound-slow.svg";
@@ -70,6 +76,7 @@ import SoundSlowIcon from "../components/icons/sound-slow.svg";
 import RussianPhrase from "../components/sounds/russianPhrase.mp3";
 import EnglishPhrase from "../components/sounds/EnglishPhrase.mp3";
 
+const showIncreseSpeed = ref(false);
 const countDown = ref(true);
 const currentPhrase = ref(0);
 const audioRef = ref(null);
@@ -81,8 +88,13 @@ const showRussianPhrase = ref(false);
 
 const onStateChange = (type) => {
   if (type === "reset") {
-    audioRef.value.src = dummyPhrases[currentPhrase.value].ruAudio;
-    audioRef.value.play();
+    // audioRef.value.src = dummyPhrases[currentPhrase.value].ruAudio;
+    // audioRef.value.play();
+    audioRef.value.pause();
+    audioRef.value.currentTime = 0;
+    state.value = "reset";
+    showEnglishPhrase.value = false;
+    countDown.value = true;
   } else if (type === "end") {
     showEnglishPhrase.value = true;
     audioRef.value.src = dummyPhrases[currentPhrase.value].enAudio;
@@ -111,7 +123,7 @@ const onStart = () => {
 
 const nextPhrase = () => {
   if (currentPhrase.value === dummyPhrases.length - 1) {
-    console.log("On ended");
+    showIncreseSpeed.value = true;
     return;
   }
 
@@ -128,7 +140,7 @@ const prevPhrase = () => {
     return;
   }
 
-  currentPhrase.value++;
+  currentPhrase.value--;
   countDown.value = true;
   audioRef.value.pause();
   audioRef.value.currentTime = 0;
@@ -165,13 +177,13 @@ const dummyPhrases = [
     enAudio: EnglishPhrase,
     ruAudio: RussianPhrase,
   },
-  {
-    en: "She likes to buy groceries at the store",
-    ru: "Она любит покупать продукты в магазине",
+  // {
+  //   en: "She likes to buy groceries at the store",
+  //   ru: "Она любит покупать продукты в магазине",
 
-    enAudio: EnglishPhrase,
-    ruAudio: RussianPhrase,
-  },
+  //   enAudio: EnglishPhrase,
+  //   ruAudio: RussianPhrase,
+  // },
 ];
 </script>
 

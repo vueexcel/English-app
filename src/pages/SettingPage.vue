@@ -7,8 +7,8 @@
             <img :src="AvatarIcon" alt="Avatar" />
           </div>
           <div>
-            <h5>{{ store.user }}</h5>
-            <h5>{{ store.loginName }}</h5>
+            <h6>{{ store.user }}</h6>
+            <h6>{{ store.loginName }}</h6>
           </div>
         </div>
         <a href="javascript:void(0)">

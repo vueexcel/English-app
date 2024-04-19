@@ -25,42 +25,18 @@
             v-model="email"
           />
         </div>
-        <div class="input-field">
-          <label for="password">Enter your password</label>
-          <div class="position-relative w-100 password-wrap">
-            <input
-              id="password-field"
-              type="password"
-              class="form-control"
-              name="password"
-              value=""
-              placeholder="Enter password"
-              v-model="password"
-            />
-            <span
-              toggle="#password-field"
-              class="fa fa-fw fa-eye field-icon toggle-password"
-            ></span>
-          </div>
-        </div>
-        <div class="input-field">
-          <label for="re-pass">Re-enter your password</label>
-          <div class="position-relative w-100 password-wrap">
-            <input
-              id="password-field"
-              type="password"
-              class="form-control"
-              name="re-pass"
-              value=""
-              placeholder="Enter password"
-              v-model="rePassword"
-            />
-            <span
-              toggle="#password-field"
-              class="fa fa-fw fa-eye field-icon toggle-password"
-            ></span>
-          </div>
-        </div>
+
+        <InputTemp
+          v-model="password"
+          :label="'Enter your password'"
+          :placeholder="'Password'"
+        />
+
+        <InputTemp
+          v-model="rePassword"
+          :label="'Re-enter your password'"
+          :placeholder="'Confirm Password'"
+        />
         <div class="forgot-pass">
           <input type="submit" class="btn" value="Register" />
         </div>
@@ -95,6 +71,8 @@ import FacebookIcon from "components/icons/facebook.svg";
 import AppleIcon from "components/icons/apple.svg";
 import { SERVER_URL } from "src/constants";
 import { useUserStore } from "src/stores/useUserStore";
+import InputTemp from "components/InputTemp.vue";
+
 const userStore = useUserStore();
 
 import { GoogleAuth } from "@codetrix-studio/capacitor-google-auth";
@@ -136,6 +114,7 @@ const signInWithGoogle = () => {
       userStore.setAccessToken(accessToken);
       console.log(accessToken);
       if (result.user.accessToken) {
+        showNotify("Login Successful", "positive");
         router.push("/home");
       }
     })

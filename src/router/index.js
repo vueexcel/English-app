@@ -26,18 +26,21 @@ export default route(function (/* { store, ssrContext } */) {
     history: createHistory(process.env.VUE_ROUTER_BASE),
   });
 
-  // Router.beforeEach((to, from, next) => {
-  //   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth === undefined || record.meta.requiresAuth);
-  //   const userToken = useUserStore().accessToken;
+  Router.beforeEach((to, from, next) => {
+    const requiresAuth = to.matched.some(
+      (record) =>
+        record.meta.requiresAuth === undefined || record.meta.requiresAuth
+    );
+    const userToken = useUserStore().accessToken;
 
-  //   if (requiresAuth && !userToken) {
-  //     next('/');
-  //   } else if (!requiresAuth && userToken) {
-  //     next('/home');
-  //   } else {
-  //     next();
-  //   }
-  // });
+    if (requiresAuth && !userToken) {
+      next("/");
+    } else if (!requiresAuth && userToken) {
+      next("/home");
+    } else {
+      next();
+    }
+  });
 
   return Router;
 });
