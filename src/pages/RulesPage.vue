@@ -2,23 +2,29 @@
   <MainLayout title="present simple" back-btn>
     <div class="rules-wrapper">
       <div class="youtube-video">
-        <img :src="youtube" width="100%" alt="Youtube" />
+        <iframe
+          width="100%"
+          height="100%"
+          src="https://www.youtube.com/embed/FofANnMlD8w"
+          frameborder="0"
+          allowfullscreen
+        ></iframe>
       </div>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at
-        imperdiet nunc, vitae viverra elit. Maecenas ut ipsum sollicitudin,
-        auctor mauris et, pellentesque leo. Nunc sit amet blandit arcu. Nullam
-        malesuada malesuada dapibus. <b>Vivamus iaculis velit</b> vel volutpat
-        egestas.
+        Learn English Grammar .
+        <b>Vivamus iaculis velit</b> vel volutpat egestas.
       </p>
       <ul>
-        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-        <li>Pellentesque viverra nisi ut ultricies scelerisque.</li>
-        <li>Quisque quis enim a eros venenatis porttitor non et ipsum.</li>
-        <li>Sed et dui a sem varius hendrerit at ac lorem.</li>
+        <li>
+          Subject-Verb Agreement: Make sure the subject and verb agree in
+          number.
+        </li>
+        <li>Use of Articles: Understand when to use 'a', 'an', and 'the'.</li>
+        <li>Punctuation: Learn how to properly use punctuation marks.</li>
+        <li>Conjunctions: Understand how to use conjunctions.</li>
       </ul>
       <div class="green-button">
-        <router-link to="/course/1/lesson"> Train </router-link>
+        <router-link to="/course/1/lesson">Train</router-link>
       </div>
     </div>
   </MainLayout>
@@ -29,18 +35,29 @@ import MainLayout from "src/layouts/MainLayout.vue";
 import { onBeforeMount, ref } from "vue";
 import youtube from "../components/icons/youtube.svg";
 
-const rules = ref({
-  description: "",
-  video: "url",
-  rules: [
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  ],
-});
+const dummyRules = () => {
+  rules.value = {
+    description: "Learn English Grammar Rules",
+    rules: [
+      {
+        title: "Subject-Verb Agreement",
+        content: "Make sure the subject and verb agree in number.",
+      },
+      {
+        title: "Use of Articles",
+        content: "Understand when to use 'a', 'an', and 'the'.",
+      },
+      {
+        title: "Punctuation",
+        content: "Learn how to properly use punctuation marks.",
+      },
+      {
+        title: "Conjunctions",
+        content: "Understand how to use conjunctions.",
+      },
+    ],
+  };
+};
 
 const getCourseRules = () => {
   //const data = axios.get("http://localhost:8000/api/getCourseRules/123456")
